@@ -1,4 +1,4 @@
-zenity --info --title MicnoLinuxへようこそ！ --text これから簡単な初期設定を行います。OKを押すかこのダイアログを消して次に進んでください。 
+zenity --info --width=400 --title MicnoLinuxへようこそ！ --text これから簡単な初期設定を行います。OKを押すかこのダイアログを消して次に進んでください。 
 browser=`zenity --list --text=インストールするブラウザを選択してください。 --radiolist --column="" --column="ブラウザ名" "" "Chrome" "" "Vivaldi" "" "Firefox(ESR)" "" "Chromium"`
 if [[ $browser = 'Firefox(ESR)' ]]; then
   (
@@ -9,6 +9,7 @@ if [[ $browser = 'Firefox(ESR)' ]]; then
   ) |
   zenity --progress \
     --title="Firefoxをインストール中..."\
+    --width=400\
     --text="apt-get install firefox-esrを実行中..."\
     --percentage=0\
     --auto-close
@@ -21,6 +22,7 @@ elif [[ $browser = 'Chromium' ]]; then
   ) |
   zenity --progress \
     --title="Chromiumをインストール中..."\
+    --width=400\
     --text="apt-get install chromiumを実行中..."\
     --percentage=0\
     --auto-close
@@ -34,6 +36,7 @@ elif [[ $browser = 'Chrome' ]]; then
   echo "100"
   ) |
   zenity --progress \
+    --width=400\
     --title="Chromeをインストール中..."\
     --text="ネットワークからdebファイルをダウンロード中..."\
     --percentage=0\
@@ -49,6 +52,7 @@ elif [[ $browser = 'Vivaldi' ]]; then
   ) |
   zenity --progress \
     --title="ViValdiをインストール中..."\
+    --width=400\
     --text="ネットワークからdebファイルをダウンロード中..."\
     --percentage=0\
     --auto-close
@@ -57,9 +61,9 @@ zenity --question --title="インストール確認" --text="コミュニケー�
 EXITCODE=$?
 if [[ $EXITCODE = 0 ]]; then
   if [[ $browser = 'Firefox(ESR)' ]]; then
-    tool=`zenity --list --text=インストールするコミュニケーションツールを選択してください。 --checklist --column="" --column="ツール名" "" "Skype" "" "Discord" "" "Slack" "" "Hangouts"`
+    tool=`zenity --list --width=400 --text=インストールするコミュニケーションツールを選択してください。 --checklist --column="" --column="ツール名" "" "Skype" "" "Discord" "" "Slack" "" "Hangouts"`
   else
-    tool=`zenity --list --text=インストールするコミュニケーションツールを選択してください。 --checklist --column="" --column="ツール名" "" "Skype" "" "Discord" "" "Slack" "" "LINE" "" "Hangouts"`
+    tool=`zenity --list --width=400 --text=インストールするコミュニケーションツールを選択してください。 --checklist --column="" --column="ツール名" "" "Skype" "" "Discord" "" "Slack" "" "LINE" "" "Hangouts"`
   fi
   if [[ `echo $tool | grep Skype` ]];then
     (
@@ -72,6 +76,7 @@ if [[ $EXITCODE = 0 ]]; then
     ) |
     zenity --progress \
       --title="Skypeをインストール中..."\
+      --width=400\
       --text="ネットワークからdebファイルをダウンロード中..."\
       --percentage=0\
       --auto-close
@@ -87,6 +92,7 @@ if [[ $EXITCODE = 0 ]]; then
     ) |
     zenity --progress \
       --title="Discordをインストール中..."\
+      --width=400\
       --text="ネットワークからdebファイルをダウンロード中..."\
       --percentage=0\
       --auto-close
@@ -102,6 +108,7 @@ if [[ $EXITCODE = 0 ]]; then
     ) |
     zenity --progress \
       --title="Slackをインストール中..."\
+      --width=400\
       --text="ネットワークからdebファイルをダウンロード中..."\
       --percentage=0\
       --auto-close
@@ -163,7 +170,7 @@ EOF
     fi
   fi
   if [[ `echo $tool | grep LINE` ]];then
-     zenity --info --title=LINEのインストール --text=LINEのインストールは手動で行ってもらいます。これから開かれるページにあるChromeに追加を押してChromeの拡張機能版のLINEをインストールしてください。
+     zenity --info --width=400 --title=LINEのインストール --text=LINEのインストールは手動で行ってもらいます。これから開かれるページにあるChromeに追加を押してChromeの拡張機能版のLINEをインストールしてください。
     if [[ $browser = 'Chromium' ]]; then
       /usr/bin/google-chrome-stable %U &
       /usr/bin/chromium https://chrome.google.com/webstore/detail/line/ophjlpahpchlmihnnnihgmmeilfjmjjc
@@ -191,6 +198,7 @@ if [[ $EXITCODE = 0 ]]; then
     ) |
     zenity --progress \
       --title="Dropboxをインストール中..."\
+      --width=400\
       --text="ネットワークからdebファイルをダウンロード中..."\
       --percentage=0\
       --auto-close
@@ -206,6 +214,7 @@ if [[ $EXITCODE = 0 ]]; then
     ) |
     zenity --progress \
       --title="MEGAをインストール中..."\
+      --width=400\
       --text="ネットワークからdebファイルをダウンロード中..."\
       --percentage=0\
       --auto-close
