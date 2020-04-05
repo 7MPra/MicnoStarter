@@ -1,7 +1,25 @@
 #!/usr/bin/env bash
 if [ ! "$UID" -eq 0 ];then
-  pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY ./Bigga-Starter.sh
+  pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY bash `cd $(dirname ${0}) && pwd`/`basename $0`
   exit
+fi
+if [[ ! -e /etc/micno/Bigga-Starter.sh ]]; then
+  mkdir /etc/micno/
+  cp $0 /etc/micno/Bigga-Starter.sh
+fi
+if [[ ! -e /usr/share/applications/biggastarter.desktop ]]; then
+  cat <<EOF > /usr/share/applications/biggastarter.desktop
+[Desktop Entry]
+Name=BiggaStarter
+Comment=MicnoLinux用パッケージインストーラー
+Exec=/etc/micno/Bigga-Starter.sh
+Terminal=true
+X-MultipleArgs=false
+Type=Application
+Icon=/usr/share/icons/hicolor/48x48/apps/bigga.svg
+Categories=System;
+StartupNotify=true
+EOF
 fi
 zenity --info --width=400 --title MicnoLinuxへようこそ！ --text これから簡単な初期設定を行います。OKを押すかこのダイアログを消して次に進んでください。 
 browser=`zenity --list --text=インストールするブラウザを選択してください。 --radiolist --column="" --column="ブラウザ名" "" "Chrome" "" "Vivaldi" "" "Firefox(ESR)" "" "Chromium"`
@@ -62,7 +80,7 @@ elif [[ $browser = 'Vivaldi' ]]; then
     --percentage=0\
     --auto-close
 fi
-zenity --question --title="インストール確認" --text="コミュニケーションツール(Skypeなど)をインストールしますか？" 2>/dev/null
+zenity --question --width=400 --title="インストール確認" --text="コミュニケーションツール(Skypeなど)をインストールしますか？" 2>/dev/null
 EXITCODE=$?
 if [[ $EXITCODE = 0 ]]; then
   if [[ $browser = 'Firefox(ESR)' ]]; then
@@ -188,7 +206,7 @@ EOF
     fi
   fi
 fi
-zenity --question --title="インストール確認" --text="クラウドストレージサービス(DropBoxなど)をインストールしますか？" 2>/dev/null
+zenity --question --width=400 --title="インストール確認" --text="クラウドストレージサービス(DropBoxなど)をインストールしますか？" 2>/dev/null
 EXITCODE=$?
 if [[ $EXITCODE = 0 ]]; then
   storage=`zenity --list --text=インストールするコミュニケーションツールを選択してください。 --checklist --column="" --column="ツール名" "" "Dropbox" "" "MEGA"`
