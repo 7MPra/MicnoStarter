@@ -1,1 +1,2 @@
 # BiggaStarter
+これはMicnoLinux用の初回起動時に実行されるパッケージマネージャーです。
