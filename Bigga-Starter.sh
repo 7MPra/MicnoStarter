@@ -1,3 +1,8 @@
+#!/usr/bin/env bash
+if [ ! "$UID" -eq 0 ];then
+  pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY ./Bigga-Starter.sh
+  exit
+fi
 zenity --info --width=400 --title MicnoLinuxへようこそ！ --text これから簡単な初期設定を行います。OKを押すかこのダイアログを消して次に進んでください。 
 browser=`zenity --list --text=インストールするブラウザを選択してください。 --radiolist --column="" --column="ブラウザ名" "" "Chrome" "" "Vivaldi" "" "Firefox(ESR)" "" "Chromium"`
 if [[ $browser = 'Firefox(ESR)' ]]; then
@@ -61,9 +66,9 @@ zenity --question --title="インストール確認" --text="コミュニケー�
 EXITCODE=$?
 if [[ $EXITCODE = 0 ]]; then
   if [[ $browser = 'Firefox(ESR)' ]]; then
-    tool=`zenity --list --width=400 --text=インストールするコミュニケーションツールを選択してください。 --checklist --column="" --column="ツール名" "" "Skype" "" "Discord" "" "Slack" "" "Hangouts"`
+    tool=`zenity --list --width=400 --height=200 --text=インストールするコミュニケーションツールを選択してください。 --checklist --column="" --column="ツール名" "" "Skype" "" "Discord" "" "Slack" "" "Hangouts"`
   else
-    tool=`zenity --list --width=400 --text=インストールするコミュニケーションツールを選択してください。 --checklist --column="" --column="ツール名" "" "Skype" "" "Discord" "" "Slack" "" "LINE" "" "Hangouts"`
+    tool=`zenity --list --width=400 --height=200 --text=インストールするコミュニケーションツールを選択してください。 --checklist --column="" --column="ツール名" "" "Skype" "" "Discord" "" "Slack" "" "LINE" "" "Hangouts"`
   fi
   if [[ `echo $tool | grep Skype` ]];then
     (
