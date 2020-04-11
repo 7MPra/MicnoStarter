@@ -1,6 +1,23 @@
 #!/usr/bin/env bash
+if [[ -e /etc/calamares ]]
+  exit
+fi
+while ! ping -q -c 1 -W 1 google.com >/dev/null; do
+  zenity --info --width=400 --title "ネットワークエラー" --text "ネットワークに接続して、OKを押してください。"
+done
 if [ ! "$UID" -eq 0 ];then
   pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY bash `cd $(dirname ${0}) && pwd`/`basename $0`
+  exit
+fi
+if [[ ! `cat /etc/apt/sources.list` = *"deb http://deb.debian.org/debian stable main"*"deb-src http://deb.debian.org/debian stable main"* ]];then
+  cat << EOF >> /etc/apt/sources.list
+
+deb http://deb.debian.org/debian stable main
+deb-src http://deb.debian.org/debian stable main
+EOF
+  apt-get update
+fi
+if [[ -e /etc/calamares ]]
   exit
 fi
 if [[ ! -e /etc/micno/Bigga-Starter.sh ]]; then
