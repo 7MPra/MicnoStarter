@@ -2,6 +2,9 @@
 if [[ -e /etc/calamares ]]
   exit
 fi
+if [[ -e ~/.config/autostart/ ]]; then
+  rm ~/.config/autostart/biggastarter.desktop
+fi
 while ! ping -q -c 1 -W 1 google.com >/dev/null; do
   zenity --info --width=400 --title "ネットワークエラー" --text "ネットワークに接続して、OKを押してください。"
 done
@@ -16,9 +19,6 @@ deb http://deb.debian.org/debian stable main
 deb-src http://deb.debian.org/debian stable main
 EOF
   apt-get update
-fi
-if [[ -e /etc/calamares ]]
-  exit
 fi
 if [[ ! -e /etc/micno/Bigga-Starter.sh ]]; then
   mkdir /etc/micno/
