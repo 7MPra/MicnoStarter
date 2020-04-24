@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-if [[ -e /etc/calamares ]]
+if [[ -e /etc/calamares ]]; then
   exit
 fi
 if [[ -e ~/.config/autostart/ ]]; then
