@@ -5,14 +5,15 @@ fi
 if [[ -e ~/.config/autostart/biggastarter.desktop ]]; then
   rm ~/.config/autostart/biggastarter.desktop
 fi
-zenity --info --width=400 --title MicnoLinuxへようこそ！ --text 'これから簡単な初期設定を行います。その前に、インターネットに接続してください。(初期設定をスキップしたいなら再起動してください。)'
-while ! ping -q -c 1 -W 1 google.com >/dev/null; do
-  zenity --info --width=400 --title "ネットワークエラー" --text "ネットワークに接続して、OKを押してください。"
-done
 if [ ! "$UID" -eq 0 ];then
+  zenity --info --width=400 --title MicnoLinuxへようこそ！ --text 'BiggaStarterを開始するために、OKを押して次に進んでパスワードを入力してください。'
   pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY bash `cd $(dirname ${0}) && pwd`/`basename $0`
   exit
 fi
+zenity --info --width=400 --title BiggaStarter --text 'これから簡単な操作を行います。インターネットに接続したことを確認してからOKを押してください。'
+while ! ping -q -c 1 -W 1 google.com >/dev/null; do
+  zenity --info --width=400 --title "ネットワークエラー" --text "ネットワークに接続して、OKを押してください。"
+done
 if [[ ! `cat /etc/apt/sources.list` = *"deb http://deb.debian.org/debian stable main"*"deb-src http://deb.debian.org/debian stable main"* ]];then
   (
   cat << EOF >> /etc/apt/sources.list
@@ -39,7 +40,7 @@ if [[ ! -e /usr/share/applications/biggastarter.desktop ]]; then
 [Desktop Entry]
 Name=BiggaStarter
 Comment=MicnoLinux用パッケージインストーラー
-Exec=/etc/micno/Bigga-Starter.sh
+Exec=pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY bash /etc/micno/Bigga-Starter.sh
 Terminal=false
 X-MultipleArgs=false
 Type=Application
@@ -48,8 +49,7 @@ Categories=System;
 StartupNotify=true
 EOF
 fi
-zenity --info --width=400 --title MicnoLinuxへようこそ！ --text これから簡単な初期設定を行います。OKを押すかこのダイアログを消して次に進んでください。 
-browser=`zenity --list --text=インストールするブラウザを選択してください。 --radiolist --column="" --column="ブラウザ名" "" "Chrome" "" "Vivaldi" "" "Firefox(ESR)" "" "Chromium"`
+browser=`zenity --list --title BiggaStarter --text=インストールするブラウザを選択してください。 --radiolist --column="" --column="ブラウザ名" "" "Chrome" "" "Vivaldi" "" "Firefox(ESR)" "" "Chromium"`
 if [[ $browser = 'Firefox(ESR)' ]]; then
   (
   echo "10" ; apt-get install -y firefox-esr
@@ -107,13 +107,13 @@ elif [[ $browser = 'Vivaldi' ]]; then
     --percentage=0\
     --auto-close
 fi
-zenity --question --width=400 --title="インストール確認" --text="コミュニケーションツール(Skypeなど)をインストールしますか？" 2>/dev/null
+zenity --question --width=400 --title BiggaStarter --text="コミュニケーションツール(Skypeなど)をインストールしますか？" 2>/dev/null
 EXITCODE=$?
 if [[ $EXITCODE = 0 ]]; then
   if [[ $browser = 'Firefox(ESR)' ]]; then
-    tool=`zenity --list --width=400 --height=200 --text=インストールするコミュニケーションツールを選択してください。 --checklist --column="" --column="ツール名" "" "Skype" "" "Discord" "" "Slack" "" "Hangouts"`
+    tool=`zenity --list --title BiggaStarter --width=400 --height=200 --text=インストールするコミュニケーションツールを選択してください。 --checklist --column="" --column="ツール名" "" "Skype" "" "Discord" "" "Slack" "" "Hangouts"`
   else
-    tool=`zenity --list --width=400 --height=200 --text=インストールするコミュニケーションツールを選択してください。 --checklist --column="" --column="ツール名" "" "Skype" "" "Discord" "" "Slack" "" "LINE" "" "Hangouts"`
+    tool=`zenity --list --title BiggaStarter --width=400 --height=200 --text=インストールするコミュニケーションツールを選択してください。 --checklist --column="" --column="ツール名" "" "Skype" "" "Discord" "" "Slack" "" "LINE" "" "Hangouts"`
   fi
   if [[ `echo $tool | grep Skype` ]];then
     (
@@ -233,10 +233,10 @@ EOF
     fi
   fi
 fi
-zenity --question --width=400 --title="インストール確認" --text="クラウドストレージサービス(DropBoxなど)をインストールしますか？" 2>/dev/null
+zenity --question --width=400 --title BiggaStarter --text="クラウドストレージサービス(DropBoxなど)をインストールしますか？" 2>/dev/null
 EXITCODE=$?
 if [[ $EXITCODE = 0 ]]; then
-  storage=`zenity --list --text=インストールするコミュニケーションツールを選択してください。 --checklist --column="" --column="ツール名" "" "Dropbox" "" "MEGA"`
+  storage=`zenity --list --title BiggaStarter --text=インストールするコミュニケーションツールを選択してください。 --checklist --column="" --column="ツール名" "" "Dropbox" "" "MEGA"`
   if [[ `echo $storage | grep Dropbox` ]];then
     (
     echo "10" ; wget --trust-server-names "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb"  ; filename=`find dropbox*.deb`
@@ -271,5 +271,5 @@ if [[ $EXITCODE = 0 ]]; then
   fi
 fi
 
-zenity --info --width=400 --title 初期設定が完了しました --text 初期設定が完了しました。さあ、MicnoLinuxを使い始めましょう! 
+zenity --info --width=400 --title すべての操作が完了しました --text すべての操作が完了しました。さあ、MicnoLinuxを使い始めましょう! 
 
