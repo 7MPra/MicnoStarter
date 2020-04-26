@@ -271,5 +271,5 @@ if [[ $EXITCODE = 0 ]]; then
   fi
 fi
 
-zenity --info --width=400 --title 初期設定が完了しました --text初期設定が完了しました。さあ、MicnoLinuxを使い始めましょう! 
+zenity --info --width=400 --title 初期設定が完了しました --text 初期設定が完了しました。さあ、MicnoLinuxを使い始めましょう! 
 
