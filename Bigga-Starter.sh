@@ -283,4 +283,4 @@ if [[ $EXITCODE = 0 ]]; then
   fi
 fi
 
-zenity --info --width=400　--window-icon=$icon --title すべての操作が完了しました --text すべての操作が完了しました。さあ、MicnoLinuxを使い始めましょう! 
+zenity --info --width=400 --window-icon=$icon --title すべての操作が完了しました --text すべての操作が完了しました。さあ、MicnoLinuxを使い始めましょう! 
