@@ -2,9 +2,10 @@
 if [[ -e /etc/calamares ]]; then
   exit
 fi
-if [[ -e ~/.config/autostart/ ]]; then
+if [[ -e ~/.config/autostart/biggastarter.desktop ]]; then
   rm ~/.config/autostart/biggastarter.desktop
 fi
+zenity --info --width=400 --title MicnoLinuxへようこそ！ --text 'これから簡単な初期設定を行います。その前に、インターネットに接続してください。(初期設定をスキップしたいなら再起動してください。)'
 while ! ping -q -c 1 -W 1 google.com >/dev/null; do
   zenity --info --width=400 --title "ネットワークエラー" --text "ネットワークに接続して、OKを押してください。"
 done
@@ -13,12 +14,21 @@ if [ ! "$UID" -eq 0 ];then
   exit
 fi
 if [[ ! `cat /etc/apt/sources.list` = *"deb http://deb.debian.org/debian stable main"*"deb-src http://deb.debian.org/debian stable main"* ]];then
+  (
   cat << EOF >> /etc/apt/sources.list
 
 deb http://deb.debian.org/debian stable main
 deb-src http://deb.debian.org/debian stable main
 EOF
-  apt-get update
+  echo "#apt-get updateを実行中..." ; apt-get update
+  echo "EOF"
+  ) |
+  zenity --progress \
+    --title="初期設定中..."\
+    --width=400\
+    --text="/etc/apt/sources.listを編集中..."\
+    --pulsate\
+    --auto-close
 fi
 if [[ ! -e /etc/micno/Bigga-Starter.sh ]]; then
   mkdir /etc/micno/
@@ -30,7 +40,7 @@ if [[ ! -e /usr/share/applications/biggastarter.desktop ]]; then
 Name=BiggaStarter
 Comment=MicnoLinux用パッケージインストーラー
 Exec=/etc/micno/Bigga-Starter.sh
-Terminal=true
+Terminal=false
 X-MultipleArgs=false
 Type=Application
 Icon=/usr/share/icons/hicolor/48x48/apps/bigga.svg
@@ -260,3 +270,6 @@ if [[ $EXITCODE = 0 ]]; then
       --auto-close
   fi
 fi
+
+zenity --info --width=400 --title 初期設定が完了しました --text初期設定が完了しました。さあ、MicnoLinuxを使い始めましょう! 
+
