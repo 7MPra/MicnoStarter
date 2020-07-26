@@ -36,6 +36,7 @@ if not check_dialog('ようこそ、MicnoLinuxへ！',
 class Win(Gtk.Window):
 	def __init__(self):
 		Gtk.Window.__init__(self, title="Micno Starter")
+		self.set_icon_from_file("/usr/share/pixmaps/starter.svg")
 		self.set_border_width(10)
 		vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
 		label=Gtk.Label()

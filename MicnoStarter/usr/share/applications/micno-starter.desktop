@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=MicnoStarter
+Comment=MicnoLinux用パッケージインストーラー
+Exec=micno-starter
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=/usr/share/pixmaps/starter.svg
+Categories=System;
+StartupNotify=true

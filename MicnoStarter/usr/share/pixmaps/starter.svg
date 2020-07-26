@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="48" height="48" version="1.1" viewBox="0 0 12.7 12.7" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <defs>
+  <clipPath id="clipPath59">
+   <path d="m213.85 201.03c0-2.1188-1.7176-3.8364-3.8364-3.8364-2.1188 0-3.8364 1.7176-3.8364 3.8364-1e-5 2.1188 1.7176 3.8364 3.8364 3.8364 2.1188 0 3.8364-1.7176 3.8364-3.8364z" fill="#500" stroke-width=".0042362"/>
+  </clipPath>
+  <clipPath id="clipPath63">
+   <path d="m-213.85-201.03c0 2.1188 1.7176 3.8364 3.8364 3.8364 2.1188 0 3.8364-1.7176 3.8364-3.8364 1e-5 -2.1188-1.7176-3.8364-3.8364-3.8364-2.1188 0-3.8364 1.7176-3.8364 3.8364z" fill="#500" stroke-width=".0042362"/>
+  </clipPath>
+ </defs>
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g transform="translate(0 -284.3)">
+  <path d="m10.092 294.39c2.0665-2.0666 2.0665-5.417 4e-6 -7.4835-2.0665-2.0666-5.417-2.0666-7.4835 0-2.0665 2.0665-2.0665 5.417 4e-6 7.4835 2.0665 2.0666 5.417 2.0666 7.4835 1e-5z" fill="#500" stroke-width=".0058431"/>
+  <rect transform="rotate(225)" x="-210.67" y="-208.92" width="1.9783" height="14.513" ry="0" clip-path="url(#clipPath63)" fill="#a7a7a7" stroke-width=".2871"/>
+  <rect transform="rotate(45)" x="211.56" y="194.41" width="1.9783" height="14.513" ry="0" clip-path="url(#clipPath59)" fill="#464646" stroke-width=".2871"/>
+ </g>
+</svg>
