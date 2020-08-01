@@ -107,8 +107,8 @@ class Win(Gtk.Window):
 			f.write('''
 if [[ ! `cat /etc/apt/sources.list` = *"deb http://deb.debian.org/debian stable main"*"deb-src http://deb.debian.org/debian stable main"* ]];then
 	cat << EOF >> /etc/apt/sources.list
-	deb http://deb.debian.org/debian stable main
-	deb-src http://deb.debian.org/debian stable main
+deb http://deb.debian.org/debian stable main
+deb-src http://deb.debian.org/debian stable main
 EOF
 fi\n''')
 			f.write('apt update\n')
