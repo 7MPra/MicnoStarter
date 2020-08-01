@@ -2,7 +2,7 @@ Package: micno-starter
 Version: 0.1.0
 Architecture: all
 Maintainer: TMP_tenpura <tmptenpura@gmail.com>
-Depends: python3, python3-gi
+Depends: curl, wget, python3, python3-gi
 Section: utils
 Priority: optional
 Description: Debian及びMicnoLinux向けのパッケージインストーラー
